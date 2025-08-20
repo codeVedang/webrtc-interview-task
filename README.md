@@ -38,4 +38,31 @@ The entire application is containerized, so you only need Docker and Docker Comp
 
 1.  **Clone the Repository**
     ```bash
-    git clone
+    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    cd your-repo-name
+    ```
+
+2.  **Start the Application**
+    From the root directory of the project, run the single command:
+    ```bash
+    docker-compose up --build
+    ```
+    This will build the necessary Docker images and start the frontend web server and the signaling server.
+
+---
+
+## 🔬 How to Test the Local Demo
+
+Once the containers are running, you can test the application's core functionality using two browser tabs on your computer.
+
+1.  **Viewer Tab:** Open your browser to `http://localhost:3000`. You will see the main page.
+2.  **Streamer Tab (Simulated Phone):** Open a second browser tab to `http://localhost:3000/phone`.
+3.  **Grant Permission:** Your browser will ask for permission to use your webcam in the streamer tab. Click **Allow**.
+
+You will now see the video from your webcam streaming live into the viewer tab.
+
+<details>
+  <summary><strong>Note on Connecting a Real Phone</strong></summary>
+  
+  Connecting a separate mobile device to the local server via an IP address (`http://<your-ip-address>:3000/phone`) may be blocked by the mobile browser's security policies, which require a secure **HTTPS** connection for camera access. For the best experience and to test with a real phone, please use the **live Vercel demo link** provided at the top of this document.
+</details>
