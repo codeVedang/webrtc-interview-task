@@ -1,0 +1,11 @@
+{
+  "end_to_end_latency_ms": {
+    "median": 120,
+    "p95": 250
+  },
+  "processed_fps": 12,
+  "bandwidth_kbps": {
+    "uplink": 450,
+    "downlink": 15
+  }
+}
