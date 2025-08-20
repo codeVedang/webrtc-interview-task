@@ -70,21 +70,26 @@ function BrowserClient() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [mediaStream, setMediaStream] = useState(null); // Use state to manage the stream
+
+  // This new useEffect will run when the stream is received
+  useEffect(() => {
+    if (mediaStream && videoRef.current) {
+      videoRef.current.srcObject = mediaStream;
+      videoRef.current.play().catch(e => console.error("Video play failed:", e));
+    }
+  }, [mediaStream]);
 
   useEffect(() => {
-    // Use a variable to ensure we only set the stream once
-    let videoStream = null;
     const pc = new RTCPeerConnection(PEER_CONNECTION_CONFIG);
-    const ws = new WebSocket(SIGNALING_SERVER_URL);
 
-    // This is the key change. This event is more reliable.
-    pc.onaddstream = (event) => {
-      console.log('✅ Stream received!', event.stream);
-      if (videoRef.current && !videoStream) {
-        videoStream = event.stream;
-        videoRef.current.srcObject = videoStream;
-      }
+    // When a track is received, update our state
+    pc.ontrack = (event) => {
+      console.log('✅ Video track received!', event.streams[0]);
+      setMediaStream(event.streams[0]);
     };
+
+    const ws = new WebSocket(SIGNALING_SERVER_URL);
 
     ws.onmessage = async (event) => {
       const message = JSON.parse(event.data);
@@ -104,7 +109,6 @@ function BrowserClient() {
       }
     };
 
-    // Generate QR code on mount
     QRCode.toDataURL(window.location.href + 'phone').then(setQrCodeUrl);
 
   }, []);
