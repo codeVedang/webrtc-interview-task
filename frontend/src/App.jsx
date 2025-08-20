@@ -6,7 +6,7 @@ import './App.css';
 ort.env.wasm.wasmPaths = "/";
 
 // This is the final, correct URL that uses the Nginx proxy
-const SIGNALING_SERVER_URL = `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`;
+const SIGNALING_SERVER_URL = `https://webrtc-interview-task.onrender.com`;
 
 const PEER_CONNECTION_CONFIG = {
   iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
