@@ -8,7 +8,7 @@ A reproducible demo that performs real-time multi-object detection on a live vid
 
 The full application is deployed and live on Vercel.
 
-**➡️ [Click here to view the live project]((https://webrtc-interview-task-vedang.vercel.app/))** *(Replace with your actual Vercel link)*
+**➡️ [Click here to view the live project](https://webrtc-interview-task-vedang.vercel.app/)
 
 ---
 
